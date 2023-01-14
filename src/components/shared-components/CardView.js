@@ -15,23 +15,38 @@ const bull = (
   </Box>
 );
 
-const CardView = () => {
+const CardView = ({ selectedRecord }) => {
   return (
-    <Card
-    // sx={{ minWidth: 275 }}
-    >
-      <CardContent>
-        <Typography variant="h5" component="div">
-          Mobile Developer
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Full Time
-        </Typography>
-        <Typography variant="body2">4 years of experience.</Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">View More</Button>
-      </CardActions>
+    <Card>
+      {!selectedRecord && (
+        <>
+          <CardContent>
+            <Typography variant="body2">
+              Please select any Record from Actions, and select a Row for
+              Details!
+            </Typography>
+          </CardContent>
+        </>
+      )}
+
+      {selectedRecord && (
+        <>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              {selectedRecord?.title}
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              {selectedRecord?.employmentType}
+            </Typography>
+            <Typography variant="body2">
+              {selectedRecord?.description}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">View Details</Button>
+          </CardActions>{" "}
+        </>
+      )}
     </Card>
   );
 };

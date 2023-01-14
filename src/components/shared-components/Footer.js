@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 const Footer = () => {
   return (
-    <div className="fixed w-full bottom-0">
+    <div className="fixed w-full bottom-0 z-50">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>

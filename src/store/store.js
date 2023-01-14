@@ -3,6 +3,6 @@ import jobReducer from "../redux/job/jobSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: jobReducer,
+    job: jobReducer,
   },
 });

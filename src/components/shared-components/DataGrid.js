@@ -1,34 +1,13 @@
 import React from "react";
-
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import NavBar from "../shared-components/Navbar";
-import Footer from "../shared-components/Footer";
-import Form from "../shared-components/Form";
 import { makeStyles, withStyles } from "@mui/styles";
 import { DataGridStyles } from "../../styles/DataGridStyles";
 import { _2s } from "../../utilities/helper";
 import { DataGrid } from "@mui/x-data-grid";
 import Tooltip from "@mui/material/Tooltip";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-
-const dummyData = [
-  {
-    id: 111,
-    title: "Mobile Developer",
-    description: "4 years of experience.",
-    employmentType: "Full Time",
-  },
-  {
-    id: 112,
-    title: "Full Stack Developer",
-    description: "5 years of experience.",
-    employmentType: "Part Time",
-  },
-];
+import { useSelector } from "react-redux";
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
@@ -43,19 +22,12 @@ const HtmlTooltip = withStyles((theme) => ({
 
 const useStyles = makeStyles(DataGridStyles);
 
-const Details = () => {
+const Details = ({ handleSelectedRecord }) => {
   const classes = useStyles();
-  // const dispatch = useDispatch();
-  // const [loading, setLoading] = useState(true);
-  // const usageDataList = useSelector(({ plan }) => plan.planUsageList);
-
-  // useEffect(() => {
-  // 	if (usageDataList) setLoading(false);
-  // 	if (!usageDataList) getUsageDataList();
-  // }, [usageDataList]);
+  const allJobs = useSelector(({ job }) => job.allJobs);
 
   const getColumns = () => {
-    const { ...columns } = dummyData[0];
+    const { ...columns } = allJobs[0];
     columns["actions"] = "";
 
     return Object.keys(columns)
@@ -67,12 +39,13 @@ const Details = () => {
           headerName: _2s(col),
           width: 150,
           editable: true,
-          resizable: true,
           renderCell: (params) => {
             return (
               <>
                 {col === "actions" && (
-                  <RemoveRedEyeOutlinedIcon className="cursor-pointer" />
+                  <HtmlTooltip title="View Record" placement="top" arrow>
+                    <RemoveRedEyeOutlinedIcon className="cursor-pointer" />
+                  </HtmlTooltip>
                 )}
 
                 {col !== "actions" && (
@@ -89,12 +62,6 @@ const Details = () => {
       });
   };
 
-  // const getUsageDataList = async () => {
-  //   const res = await getPlanUsage();
-  //   await dispatch(setPlanUsageData(res.data));
-  //   setLoading(false);
-  // };
-
   return (
     <div>
       <Card className="w-full rounded-20 shadow">
@@ -104,14 +71,12 @@ const Details = () => {
             pagination
             paginationMode="server"
             rowHeight={80}
-            rows={dummyData}
+            rows={allJobs}
             columns={getColumns()}
             onRowClick={(params, event) => {
-              if (!event.ignore) {
-                alert("asd");
-              }
+              if (!event.ignore) handleSelectedRecord(params?.row);
             }}
-            rowCount={dummyData?.length}
+            rowCount={allJobs?.length}
             rowsPerPageOptions={[10, 30, 50, 100]}
             disableSelectionOnClick
             checkboxSelection

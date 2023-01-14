@@ -138,7 +138,7 @@ const NavBar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={() => handleMenuItemClick("/")}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -148,13 +148,25 @@ const NavBar = () => {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Home</p>
+      </MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick("/job_list")}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Job List</p>
       </MenuItem>
     </Menu>
   );
 
   return (
-    <div className="fixed w-full top-0">
+    <div className="fixed w-full top-0 z-50">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>

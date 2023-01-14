@@ -1,12 +1,10 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { makeStyles } from "@mui/styles";
 import { HomeStyles } from "../styles/HomeStyles";
-
 import NavBar from "./shared-components/Navbar";
 import Footer from "./shared-components/Footer";
 import DataGrid from "./shared-components/DataGrid";
@@ -24,6 +22,9 @@ const useStyles = makeStyles(HomeStyles);
 
 const JobList = () => {
   const classes = useStyles();
+  const [selectedRecord, setSelectedRecord] = useState(null);
+
+  const handleSelectedRecord = (record) => setSelectedRecord(record);
 
   return (
     <div>
@@ -36,12 +37,12 @@ const JobList = () => {
           <Grid container spacing={2}>
             <Grid item md={7} sm={12} xs={12}>
               <Item className="">
-                <DataGrid />
+                <DataGrid handleSelectedRecord={handleSelectedRecord} />
               </Item>
             </Grid>
             <Grid item md={5} sm={12} xs={12}>
               <Item>
-                <CardView />
+                <CardView selectedRecord={selectedRecord} />
               </Item>
             </Grid>
           </Grid>

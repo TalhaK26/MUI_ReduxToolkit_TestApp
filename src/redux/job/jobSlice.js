@@ -3,7 +3,7 @@ import { allJobs, setJobsInStorage } from "../../utilities/storage";
 
 // Initial Job State
 const initialState = {
-  allJobs: allJobs ? JSON.parse(allJobs) : null,
+  allJobs: allJobs ? JSON.parse(allJobs) : [],
 };
 
 // Job Reducer
@@ -13,8 +13,10 @@ export const jobSlice = createSlice({
   reducers: {
     // Actions
     setJobs: (state, action) => {
-      setJobsInStorage(action.payload);
-      state.allJobs = action.payload;
+      const jobs = [...state.allJobs];
+      jobs.unshift(action.payload);
+      setJobsInStorage(jobs);
+      state.allJobs = jobs;
     },
   },
 });
