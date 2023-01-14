@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import { makeStyles, withStyles } from "@mui/styles";
@@ -22,9 +23,19 @@ const HtmlTooltip = withStyles((theme) => ({
 
 const useStyles = makeStyles(DataGridStyles);
 
-const Details = ({ handleSelectedRecord }) => {
+const Details = ({ handleSelectedJob }) => {
   const classes = useStyles();
+  const history = useHistory();
   const allJobs = useSelector(({ job }) => job.allJobs);
+
+  const handleNavigateToDetails = (job) => {
+    history.push({
+      pathname: `/job_detail/${job?.id}`,
+      state: {
+        currentJob: job,
+      },
+    });
+  };
 
   const getColumns = () => {
     const { ...columns } = allJobs[0];
@@ -44,7 +55,13 @@ const Details = ({ handleSelectedRecord }) => {
               <>
                 {col === "actions" && (
                   <HtmlTooltip title="View Record" placement="top" arrow>
-                    <RemoveRedEyeOutlinedIcon className="cursor-pointer" />
+                    <RemoveRedEyeOutlinedIcon
+                      className="cursor-pointer"
+                      onClick={(event) => {
+                        event.ignore = true;
+                        handleSelectedJob(params?.row);
+                      }}
+                    />
                   </HtmlTooltip>
                 )}
 
@@ -74,7 +91,7 @@ const Details = ({ handleSelectedRecord }) => {
             rows={allJobs}
             columns={getColumns()}
             onRowClick={(params, event) => {
-              if (!event.ignore) handleSelectedRecord(params?.row);
+              if (!event.ignore) handleNavigateToDetails(params.row);
             }}
             rowCount={allJobs?.length}
             rowsPerPageOptions={[10, 30, 50, 100]}

@@ -43,7 +43,7 @@ const Details = () => {
           >
             <Grid item md={8} sm={12} xs={12}>
               <Item className="w-full">
-                <CardView />
+                <CardView isDetail={true} />
               </Item>
             </Grid>
           </Grid>

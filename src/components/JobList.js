@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -22,10 +23,12 @@ const useStyles = makeStyles(HomeStyles);
 
 const JobList = () => {
   const classes = useStyles();
-  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const allJobs = useSelector(({ job }) => job.allJobs);
 
-  const handleSelectedRecord = (record) => setSelectedRecord(record);
+  const handleSelectedJob = (record) => setSelectedJob(record);
 
+  console.log("selectedJob ===>", selectedJob);
   return (
     <div>
       {/* Header */}
@@ -37,12 +40,20 @@ const JobList = () => {
           <Grid container spacing={2}>
             <Grid item md={7} sm={12} xs={12}>
               <Item className="">
-                <DataGrid handleSelectedRecord={handleSelectedRecord} />
+                {!allJobs.length && <p>No data found!</p>}
+
+                {allJobs.length && (
+                  <DataGrid handleSelectedJob={handleSelectedJob} />
+                )}
               </Item>
             </Grid>
             <Grid item md={5} sm={12} xs={12}>
               <Item>
-                <CardView selectedRecord={selectedRecord} />
+                {!allJobs.length && <p>No data found!</p>}
+
+                {allJobs.length && (
+                  <CardView selectedJob={selectedJob} isDetail={false} />
+                )}
               </Item>
             </Grid>
           </Grid>
