@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Box from "@mui/material/Box";
+import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { CardViewStyles } from "../../styles/CardViewStyles";
+
+const useStyles = makeStyles(CardViewStyles);
 
 const CardView = ({ isDetail, selectedJob }) => {
   const history = useHistory();
-  console.log("history", history);
+  const classes = useStyles();
   const record =
     isDetail === false ? selectedJob : history?.location?.state?.currentJob;
   const [job, setJob] = useState(record);
@@ -27,10 +30,8 @@ const CardView = ({ isDetail, selectedJob }) => {
     });
   };
 
-  console.log("job", job);
-
   return (
-    <Card>
+    <Card className={classes.root}>
       {!job && (
         <>
           <CardContent>

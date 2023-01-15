@@ -43,7 +43,6 @@ const Details = ({ handleSelectedJob }) => {
     return Object.keys(columns)
       .filter((c) => c !== "id")
       .map((col, index) => {
-        console.log("col", col);
         return {
           index,
           field: col,

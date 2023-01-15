@@ -54,8 +54,6 @@ const Form = () => {
     } else setErrorMsg("Title Field is required!");
   };
 
-  console.log("allJobs", allJobs);
-  console.log("jobForm", jobForm);
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
