@@ -31,7 +31,9 @@ const CardView = ({ isDetail, selectedJob }) => {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card
+      className={isDetail === false ? classes.listDesign : classes.detailDesign}
+    >
       {!job && (
         <>
           <CardContent>
@@ -52,7 +54,9 @@ const CardView = ({ isDetail, selectedJob }) => {
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {job?.employmentType}
             </Typography>
-            <Typography variant="body2">{job?.description}</Typography>
+            <Typography variant="body2" className={classes.desc}>
+              {job?.description}
+            </Typography>
           </CardContent>
 
           {!isDetail && (
