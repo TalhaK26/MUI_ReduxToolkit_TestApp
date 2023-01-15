@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
 import { makeStyles, withStyles } from "@mui/styles";
 import { DataGridStyles } from "../../styles/DataGridStyles";
-import { _2s } from "../../utilities/helper";
+import { capitalize } from "../../utilities/helper";
 import { DataGrid } from "@mui/x-data-grid";
 import Tooltip from "@mui/material/Tooltip";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -44,12 +43,19 @@ const Details = ({ handleSelectedJob }) => {
     return Object.keys(columns)
       .filter((c) => c !== "id")
       .map((col, index) => {
+        console.log("col", col);
         return {
           index,
           field: col,
-          headerName: _2s(col),
+          headerName: capitalize(col),
           width: 150,
           editable: true,
+          align: "center",
+          headerAlign: "center",
+          // headerClassName: classes.headerCss,
+          renderHeader: (params) => {
+            return <b className="text-[14px]">{params.colDef.headerName}</b>;
+          },
           renderCell: (params) => {
             return (
               <>
@@ -67,7 +73,7 @@ const Details = ({ handleSelectedJob }) => {
 
                 {col !== "actions" && (
                   <HtmlTooltip title={params.value} placement="top" arrow>
-                    <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex justify-content-between align-items-center text-[12px]">
                       {params.value}
                     </div>
                   </HtmlTooltip>
@@ -82,7 +88,7 @@ const Details = ({ handleSelectedJob }) => {
   return (
     <div>
       <Card className="w-full rounded-20 shadow">
-        <div style={{ height: "400px", width: "100%" }}>
+        <div style={{ height: "500px", width: "100%" }}>
           <DataGrid
             className={classes.root}
             pagination

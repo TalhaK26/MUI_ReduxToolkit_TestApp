@@ -44,7 +44,7 @@ const CardView = ({ isDetail, selectedJob }) => {
 
       {job && (
         <>
-          <CardContent>
+          <CardContent className="text-center">
             <Typography variant="h5" component="div">
               {job?.title}
             </Typography>

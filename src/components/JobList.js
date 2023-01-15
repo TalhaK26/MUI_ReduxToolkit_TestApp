@@ -11,14 +11,6 @@ import Footer from "./shared-components/Footer";
 import DataGrid from "./shared-components/DataGrid";
 import CardView from "./shared-components/CardView";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
 const useStyles = makeStyles(HomeStyles);
 
 const JobList = () => {
@@ -28,7 +20,6 @@ const JobList = () => {
 
   const handleSelectedJob = (record) => setSelectedJob(record);
 
-  console.log("selectedJob ===>", selectedJob);
   return (
     <div>
       {/* Header */}
@@ -39,22 +30,18 @@ const JobList = () => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item md={7} sm={12} xs={12}>
-              <Item className="">
-                {!allJobs.length && <p>No data found!</p>}
+              {!allJobs.length && <p>No data found!</p>}
 
-                {allJobs.length && (
-                  <DataGrid handleSelectedJob={handleSelectedJob} />
-                )}
-              </Item>
+              {allJobs.length && (
+                <DataGrid handleSelectedJob={handleSelectedJob} />
+              )}
             </Grid>
             <Grid item md={5} sm={12} xs={12}>
-              <Item>
-                {!allJobs.length && <p>No data found!</p>}
+              {!allJobs.length && <p>No data found!</p>}
 
-                {allJobs.length && (
-                  <CardView selectedJob={selectedJob} isDetail={false} />
-                )}
-              </Item>
+              {allJobs.length && (
+                <CardView selectedJob={selectedJob} isDetail={false} />
+              )}
             </Grid>
           </Grid>
         </Box>
