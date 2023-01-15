@@ -8,6 +8,7 @@ import Footer from "./shared-components/Footer";
 import Form from "./shared-components/Form";
 import { makeStyles } from "@mui/styles";
 import { HomeStyles } from "../styles/HomeStyles";
+import clsx from "clsx";
 
 const Item = styled(Paper)(({ theme }) => ({
   // backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -23,19 +24,20 @@ const Home = () => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className="h-full">
       {/* Header */}
       <NavBar />
 
       {/* Main */}
-      <div className={classes.root}>
-        <Box sx={{ flexGrow: 1 }}>
+      <div className={clsx(classes.root, "h-full")}>
+        <Box sx={{ flexGrow: 1 }} className="h-full">
           <Grid
             container
             spacing={0}
             direction="column"
             alignItems="center"
             justifyContent="center"
+            className="h-full"
           >
             <Grid item>
               <Item className="">

@@ -1,6 +1,6 @@
 export const HomeStyles = {
   root: {
-    margin: "100px 0",
-    padding: "0px 30px",
+    // margin: "100px 0",
+    padding: "30px 30px",
   },
 };
