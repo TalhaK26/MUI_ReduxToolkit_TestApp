@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import Card from "@mui/material/Card";
 import { makeStyles, withStyles } from "@mui/styles";
@@ -51,7 +51,6 @@ const Details = ({ handleSelectedJob }) => {
           editable: true,
           align: "center",
           headerAlign: "center",
-          // headerClassName: classes.headerCss,
           renderHeader: (params) => {
             return <b className="text-[14px]">{params.colDef.headerName}</b>;
           },
